@@ -29,6 +29,7 @@ class CustomTheme {
         elevation: 0,
         color: Palette.almostBlack,
       ),
+
       textTheme: theme.primaryTextTheme
           .copyWith(
             button: theme.primaryTextTheme.button?.copyWith(
@@ -40,9 +41,19 @@ class CustomTheme {
           .apply(
             displayColor: Colors.white,
           ),
+
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(backgroundColor: Palette.red500),
-      ),// text bg color
+      ),
+      
+      sliderTheme: SliderThemeData(
+        activeTrackColor: Colors.white,
+        inactiveTrackColor: Colors.grey.shade800,
+        thumbColor: Colors.white,
+        valueIndicatorColor: Palette.red500,
+        inactiveTickMarkColor: Colors.transparent,
+        activeTickMarkColor: Colors.transparent,  
+      )
     );
   }
 }
