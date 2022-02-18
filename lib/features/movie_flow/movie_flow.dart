@@ -14,7 +14,6 @@ class MovieFlow extends StatefulWidget {
 class _MovieFlowState extends State<MovieFlow> {
   final pageController = PageController();
   //page controller. and need to dispose of it
-
   void nextPage() {
     pageController.nextPage(
       duration: const Duration(milliseconds: 600),

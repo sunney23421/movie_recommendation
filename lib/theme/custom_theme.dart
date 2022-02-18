@@ -8,7 +8,7 @@ class CustomTheme {
     return ThemeData(
       colorScheme: ColorScheme.fromSwatch(
           primarySwatch: MaterialColor(
-            Palette.red500.value,
+             Palette.red500.value,
             const {
               100: Palette.red100,
               200: Palette.red200,
