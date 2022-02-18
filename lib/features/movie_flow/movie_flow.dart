@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/genre_screen.dart';
 import 'package:movie_recommendation/features/movie_flow/landing/landing_screen.dart';
 import 'package:movie_recommendation/features/movie_flow/rating/rating_screen.dart';
-import 'package:movie_recommendation/features/year_back/years_back_screen.dart';
+import 'package:movie_recommendation/features/movie_flow/year_back/years_back_screen.dart';
 
 class MovieFlow extends StatefulWidget {
   const MovieFlow({Key? key}) : super(key: key);

@@ -55,8 +55,9 @@ class MovieFlowState {
       yearsBack: yearsBack ?? this.yearsBack,
       genres: genres ?? this.genres,
       movie: movie ?? this.movie,
+      //?? if xxx is null, use defalse value
     );
-  }
+  }//copy orginan state
 
   @override
   bool operator ==(Object other) {
