@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_recommendation/core/constants.dart';
 import 'package:movie_recommendation/core/widget/primary_button.dart';
+import 'package:movie_recommendation/features/movie_flow/result/result_screen.dart';
 
 class YearsBackScreen extends StatefulWidget {
   const YearsBackScreen({
@@ -36,7 +37,7 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
           ),
           const Spacer(),
           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text("${yearsBack.ceil()}"),
+            Text("${yearsBack.ceil()}",style: theme.textTheme.headline2,),
             Text(
               "Years back",
               style: theme.textTheme.headline4?.copyWith(
@@ -55,11 +56,11 @@ class _YearsBackScreenState extends State<YearsBackScreen> {
             min: 0,
             max: 70,
             divisions: 70,
-            label: '${yearsBack.ceil()}',
+            label: '${yearsBack.ceil()}'
           ),
           const Spacer(),
           PrimaryButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(ResultScreen.route()),
             text: "Amazing",
           ),
           const SizedBox(
