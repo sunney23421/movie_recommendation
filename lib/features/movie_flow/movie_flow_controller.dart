@@ -1,15 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/genre.dart';
 import 'package:movie_recommendation/features/movie_flow/movie_flow_state.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
-
-final MovieFlowControllerProvider =
+//riverpod manager
+final movieFlowControllerProvider =
     StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
   (ref) {
     return MovieFlowController(
         MovieFlowState(pageController: PageController()));
   },
+  //final something = ref.watch(someOtherProvider)
 );
 
 class MovieFlowController extends StateNotifier<MovieFlowState> {
@@ -18,7 +20,40 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
   void toggleSelected(Genre genre) {
     state = state.copyWith(genres: [
       for (final oldGenre in state.genres)
-        if (oldGenre == genre) oldGenre.toggleSelected()
+        if (oldGenre == genre) oldGenre.toggleSelected() else oldGenre
     ]);
+  }//?????
+
+  void updateRating(int updateRating) {
+    state = state.copyWith(rating: updateRating);
+  }
+
+  void updateYearsBack(int updateYearsBack) {
+    state = state.copyWith(yearsBack: updateYearsBack);
+  }
+
+  void nextPage() {
+    if (state.pageController.page! >= 1) {
+      if (!state.genres.any((element) => element.isSelected == true)) {
+        return;
+      }
+    }
+    state.pageController.nextPage(
+        duration: const Duration(microseconds: 600),
+        curve: Curves.easeInOutCubic);
+  }
+
+  void previousPage() {
+    state.pageController.previousPage(
+        duration: const Duration(microseconds: 600),
+        curve: Curves.easeOutCubic);
+  }
+
+  @override
+  void dispose() {
+    state.pageController.dispose();
+    super.dispose();
   }
 }
+//Lecture 2 - Controller and Provider, have to watch back
+//Lecture 3 - Transitioning to Riverpod -- using riverpod

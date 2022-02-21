@@ -1,49 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_recommendation/core/constants.dart';
 import 'package:movie_recommendation/core/widget/primary_button.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/genre.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/list_card.dart';
+import 'package:movie_recommendation/features/movie_flow/movie_flow_controller.dart';
 
-class GenreScreen extends StatefulWidget {
-  const GenreScreen(
-      {Key? key, required this.nextPage, required this.previousPage})
-      : super(key: key);
-
-  final VoidCallback nextPage;
-  final VoidCallback previousPage;
-  @override
-  _GenreScreenState createState() => _GenreScreenState();
-}
-
-class _GenreScreenState extends State<GenreScreen> {
-//fake list
-  List<Genre> genres = const [
-    Genre(name: "Action"),
-    Genre(name: "Comedy"),
-    Genre(name: "Horror"),
-    Genre(name: "Anime"),
-    Genre(name: "Drame"),
-    Genre(name: "Family"),
-    Genre(name: "Romance"),
-  ];
-
-  void toggleSelected(Genre genre) {
-    List<Genre> updatedGenres = [
-      for (final oldGenre in genres)
-        if (oldGenre == genre) oldGenre.toggleSelected() else oldGenre
-    ];
-    setState(() {
-      genres = updatedGenres;
-    });
-  } //method
+class GenreScreen extends ConsumerWidget {
+  const GenreScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: widget.previousPage,
+          onPressed:
+              ref.read(movieFlowControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -54,24 +29,31 @@ class _GenreScreenState extends State<GenreScreen> {
             style: theme.textTheme.headline5,
             textAlign: TextAlign.center,
           ),
-          Expanded(child: ListView.separated(
+          Expanded(
+              child: ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: KListItemSpacing),
-            itemCount: genres.length,
-            itemBuilder: (context,index){
-              final genre = genres[index];
+            itemCount: ref.watch(movieFlowControllerProvider).genres.length,
+            itemBuilder: (context, index) {
+              final genre =
+                  ref.watch(movieFlowControllerProvider).genres[index];
               return ListCard(
-                genre: genre,
-                onTap: ()=> toggleSelected(genre)
+                  genre: genre,
+                  onTap: () => ref
+                      .read(movieFlowControllerProvider.notifier)
+                      .toggleSelected(genre));
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: KListItemSpacing,
               );
             },
-            separatorBuilder: (context,index){
-              return const SizedBox(height: KListItemSpacing,);
-            },
           )),
-          PrimaryButton(onPressed: widget.nextPage, text: "Continue"),
+          PrimaryButton(onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage, text: "Continue"),
           const SizedBox(height: kMediumSpacing)
         ],
       )),
     );
   }
 }
+
+//  Lecture 3 - Transitioning to Riverpod

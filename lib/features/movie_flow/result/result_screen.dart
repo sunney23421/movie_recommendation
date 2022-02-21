@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_recommendation/core/constants.dart';
 import 'package:movie_recommendation/core/widget/primary_button.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/genre.dart';
+import 'package:movie_recommendation/features/movie_flow/movie_flow_controller.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ConsumerWidget {
   static route({bool fullscreenDialog = true}) => MaterialPageRoute(
         builder: (context) => const ResultScreen(),
         fullscreenDialog: fullscreenDialog,
@@ -13,19 +15,9 @@ class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key}) : super(key: key);
   final double movieHeight = 150;
 
-  final movie = const Movie(
-    title: "The hulk",
-    overview: "this is the oveview",
-    voteAverage: 4.5,
-    genres: [Genre(name: "Action"), Genre(name: "Fantasy")],
-    releaseDate: "2019-05-24",
-    backdropPath: "",
-    posterPath: "",
-
-    //fake obj
-  );
+ 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(children: [
@@ -40,7 +32,7 @@ class ResultScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     bottom: -(movieHeight / 2),
                     child: MovieImageDetails(
-                        movie: movie, movieHeight: movieHeight),
+                        movie: ref.watch(movieFlowControllerProvider).movie, movieHeight: movieHeight),
                   ),
                 ],
               ),
@@ -50,7 +42,7 @@ class ResultScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  movie.overview,
+                  ref.watch(movieFlowControllerProvider).movie.overview,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
               )
@@ -65,11 +57,11 @@ class ResultScreen extends StatelessWidget {
   }
 }
 
-class CoverImage extends StatelessWidget {
+class CoverImage extends ConsumerWidget {
   const CoverImage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       constraints: const BoxConstraints(minHeight: 298),
       child: ShaderMask(
@@ -128,7 +120,7 @@ class MovieImageDetails extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "4,8",
+                  movie.voteAverage.toString(),
                   style: theme.textTheme.bodyText2?.copyWith(
                     color: theme.textTheme.bodyText2?.color?.withOpacity(0.62),
                   ),
@@ -146,3 +138,5 @@ class MovieImageDetails extends StatelessWidget {
     );
   }
 }
+
+//  Lecture 3 - Transitioning to Riverpod
