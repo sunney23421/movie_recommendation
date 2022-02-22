@@ -23,9 +23,9 @@ class TMDMovieRepository implements MovieRepository {
 
   @override
   Future<List<GenreEntity>> getMovieGenres() async {
-    final response = await dio.get("genre/movie/list", queryParameters: {
-      "api_key": api,
-      "language": "en-US",
+    final response = await dio.get('genre/movie/list', queryParameters: {
+      'api_key': api,
+      'language': 'en-US',
     });
     final results = List<Map<String, dynamic>>.from(response.data["genres"]);
     final genres = results.map((e) => GenreEntity.fromMap(e)).toList();
@@ -36,19 +36,19 @@ class TMDMovieRepository implements MovieRepository {
   @override
   Future<List<MovieEntity>> getRecommendedMovies(
       double rating, String date, String genreIds) async {
-    final response = await dio.get("discover/movie", queryParameters: {
-      "api_key": api,
-      "language": "en_US",
-      "sort_by": "popularity.desc",
-      "include_adult": false,
-      "vote_average.gte": rating,
-      "page": 1,
-      "release_date.gte": date,
-      "wiht_genres": genreIds,
+    final response = await dio.get('discover/movie', queryParameters: {
+      'api_key': api,
+      'language': 'en-US',
+      'sort_by': 'popularity.desc',
+      'include_adult': false,
+      'vote_average.gte': rating,
+      'page': 1,
+      'release_date.gte': date,
+      'with_genres': genreIds,
     });
-    final results = List<Map<String, dynamic>>.from(response.data["results"]);
-    final moives = results.map((e) => MovieEntity.from(e)).toList();
-    return moives;
+    final results = List<Map<String, dynamic>>.from(response.data['results']);
+      final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
+      return movies;
   }
 }
 //Lecture 3 - Creating the Repository

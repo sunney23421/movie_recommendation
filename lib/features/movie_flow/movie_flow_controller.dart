@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/genre.dart';
@@ -6,9 +8,7 @@ import 'package:movie_recommendation/features/movie_flow/movie_service.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
 
 //riverpod manager
-final movieFlowControllerProvider =
-    StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
-        (ref) {
+final movieFlowControllerProvider = StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>((ref) {
   return MovieFlowController(
     MovieFlowState(
       pageController: PageController(),
@@ -20,6 +20,7 @@ final movieFlowControllerProvider =
 });
 
 class MovieFlowController extends StateNotifier<MovieFlowState> {
+  
   MovieFlowController(
     MovieFlowState state,
     this._movieService,
@@ -33,6 +34,7 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     final result = await _movieService.getGenres();
 
     state = state.copyWith(genres: AsyncValue.data(result));
+    print("MovieFlowController");
   }
 
   Future<void> getRecommendedMovie() async {

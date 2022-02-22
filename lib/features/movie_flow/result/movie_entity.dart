@@ -20,19 +20,22 @@ class MovieEntity {
     this.posterPath,
   });
 
-  factory MovieEntity.from(Map<String, dynamic> map) {
+  factory MovieEntity.fromMap(Map<String, dynamic> map) {
     return MovieEntity(
-        title: map["title"],
-        overview: map["overview"],
-        voteAverage: map["voteAverage"],
-        genreIds: List.from(map["genreIds"]),
-        releaseDate: map["release_date"],
-        backdropPath: map["backdrop_path"],
-        posterPath: map["poster_path"]);
+      title: map['title'],
+      overview: map['overview'],
+      voteAverage: map['vote_average'],
+      genreIds: List.from(map['genre_ids']),
+      releaseDate: map['release_date'],
+      backdropPath: map['backdrop_path'],
+      posterPath: map['poster_path'],
+    );
   }
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
+
     return other is MovieEntity &&
         other.title == title &&
         other.overview == overview &&
@@ -53,8 +56,9 @@ class MovieEntity {
         backdropPath.hashCode ^
         posterPath.hashCode;
   }
+
   @override
   String toString() {
-    return "MovieEntity(title: $title, overview: $overview, voteAverage: $voteAverage, genreIds: $genreIds, releaseDate: $releaseDate, backdropPath: $backdropPath, posterPath: $posterPath)";
+    return 'MovieEntity(title: $title, overview: $overview, voteAverage: $voteAverage, genreIds: $genreIds, releaseDate: $releaseDate, backdropPath: $backdropPath, posterPath: $posterPath)';
   }
 }

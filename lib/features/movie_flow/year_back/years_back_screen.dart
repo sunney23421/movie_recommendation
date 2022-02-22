@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,32 +19,36 @@ class YearsBackScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-            onPressed:
-                ref.read(movieFlowControllerProvider.notifier).previousPage),
+          onPressed:
+              ref.read(movieFlowControllerProvider.notifier).previousPage,
+        ),
       ),
       body: Center(
-          child: Column(
-        children: [
-          Text(
-            "How many years back should we check for",
-            style: theme.textTheme.headline5,
-            textAlign: TextAlign.center,
-          ),
-          const Spacer(),
-          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        child: Column(
+          children: [
             Text(
-              "${ref.watch(movieFlowControllerProvider).yearsBack}",
-              style: theme.textTheme.headline2,
+              'How many years back should we check for?',
+              style: theme.textTheme.headline5,
+              textAlign: TextAlign.center,
             ),
-            Text(
-              "Years back",
-              style: theme.textTheme.headline4?.copyWith(
-                color: theme.textTheme.headline4?.color?.withOpacity(0.62),
-              ),
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${ref.watch(movieFlowControllerProvider).yearsBack}',
+                  style: theme.textTheme.headline2,
+                ),
+                Text(
+                  'Years back',
+                  style: theme.textTheme.headline4?.copyWith(
+                    color: theme.textTheme.headline4?.color?.withOpacity(0.62),
+                  ),
+                ),
+              ],
             ),
-          ]),
-          const Spacer(),
-          Slider(
+            const Spacer(),
+            Slider(
               onChanged: (value) {
                 ref
                     .read(movieFlowControllerProvider.notifier)
@@ -53,23 +59,24 @@ class YearsBackScreen extends ConsumerWidget {
               min: 0,
               max: 70,
               divisions: 70,
-              label: '${ref.watch(movieFlowControllerProvider).yearsBack}'),
-          const Spacer(),
-          PrimaryButton(
-            onPressed: () async {
-              await ref
-                  .read(movieFlowControllerProvider.notifier)
-                  .getRecommendedMovie();
-              Navigator.of(context).push(ResultScreen.route());
-            },
-            isLoading: ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
-            text: "Amazing",
-          ),
-          const SizedBox(
-            height: kMediumSpacing,
-          )
-        ],
-      )),
+              label: '${ref.watch(movieFlowControllerProvider).yearsBack}',
+            ),
+            const Spacer(),
+            PrimaryButton(
+              onPressed: () async {
+                await ref
+                    .read(movieFlowControllerProvider.notifier)
+                    .getRecommendedMovie();
+                Navigator.of(context).push(ResultScreen.route());
+              },
+              isLoading:
+                  ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
+              text: 'Amazing',
+            ),
+            const SizedBox(height: kMediumSpacing),
+          ],
+        ),
+      ),
     );
   }
 }

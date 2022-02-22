@@ -10,7 +10,7 @@ import 'package:riverpod/riverpod.dart';
 
 final movieServiceProvider = Provider<MovieService>((ref) {
   final movieRepository = ref.watch(movieRepositoryProvider);
-  return TMDMovieService(movieRepository);
+  return TMDBMovieService(movieRepository);
 });
 
 abstract class MovieService {
@@ -19,12 +19,12 @@ abstract class MovieService {
     int rating,
     int yearsBack,
     List<Genre> genres, [
-    DateTime? yearsBackFromDate
+    DateTime? yearsBackFromDate,
   ]);
 }
 
-class TMDMovieService implements MovieService {
-  TMDMovieService(this._movieRepository);
+class TMDBMovieService implements MovieService {
+  TMDBMovieService(this._movieRepository);
   final MovieRepository _movieRepository;
 
   @override
@@ -40,9 +40,9 @@ class TMDMovieService implements MovieService {
       [DateTime? yearsBackFromDate]) async {
     final date = yearsBackFromDate ?? DateTime.now();
     final year = date.year - yearsBack;
-    final genreIds = genres.map((e) => e.id).toList().join(",");
+    final genreIds = genres.map((e) => e.id).toList().join(',');
     final movieEntities = await _movieRepository.getRecommendedMovies(
-        rating.toDouble(), "$year-01-01", genreIds);
+        rating.toDouble(), '$year-01-01', genreIds);
     final movies =
         movieEntities.map((e) => Movie.fromEntity(e, genres)).toList();
     final rnd = Random();

@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:movie_recommendation/core/constants.dart';
 
 //coustom widget
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+  const PrimaryButton(  {
     Key? key,
     required this.onPressed,
     required this.text,
@@ -20,6 +22,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+     
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: TextButton(
         style: TextButton.styleFrom(
@@ -40,9 +43,12 @@ class PrimaryButton extends StatelessWidget {
                 text,
                 style: Theme.of(context).textTheme.button,
               ),
+              
+              
           ],
         ),
       ),
+      
     );
   }
 }

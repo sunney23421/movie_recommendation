@@ -1,11 +1,12 @@
 //riverpod
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_recommendation/features/movie_flow/movie_flow.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
 
 import 'genre/genre.dart';
-
 
 @immutable
 class MovieFlowState {
@@ -21,7 +22,7 @@ class MovieFlowState {
     required this.genres,
     this.rating = 5,
     this.yearsBack = 10,
-  }); //constuger
+  });
 
   MovieFlowState copyWith({
     PageController? pageController,
@@ -36,14 +37,13 @@ class MovieFlowState {
       yearsBack: yearsBack ?? this.yearsBack,
       genres: genres ?? this.genres,
       movie: movie ?? this.movie,
-      //?? if xxx is null, use defalse value
     );
-  } //copy orginan state
+  }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+    print("MovieFlowState");
     return other is MovieFlowState &&
         other.pageController == pageController &&
         other.rating == rating &&
@@ -54,6 +54,10 @@ class MovieFlowState {
 
   @override
   int get hashCode {
-    return pageController.hashCode ^ rating.hashCode ^ yearsBack.hashCode ^ genres.hashCode ^ movie.hashCode;
+    return pageController.hashCode ^
+        rating.hashCode ^
+        yearsBack.hashCode ^
+        genres.hashCode ^
+        movie.hashCode;
   }
 }
