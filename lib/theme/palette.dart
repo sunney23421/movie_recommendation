@@ -1,5 +1,4 @@
 //Defi all the colors that we're going to use
-
 import 'package:flutter/rendering.dart';
 
 class Palette {

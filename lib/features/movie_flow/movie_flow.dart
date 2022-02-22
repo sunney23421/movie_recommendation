@@ -19,7 +19,6 @@ class MovieFlow extends ConsumerWidget {
         GenreScreen(),
         RatingScreen(),
         YearsBackScreen(),
-       
       ],
     );
   } //page view

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:movie_recommendation/theme/palette.dart';
 
 class CustomTheme {
@@ -8,7 +7,7 @@ class CustomTheme {
     return ThemeData(
       colorScheme: ColorScheme.fromSwatch(
           primarySwatch: MaterialColor(
-             Palette.red500.value,
+            Palette.red500.value,
             const {
               100: Palette.red100,
               200: Palette.red200,
@@ -22,14 +21,12 @@ class CustomTheme {
             },
           ),
           accentColor: Palette.red500,
-          //overflow color
           brightness: Brightness.dark),
       scaffoldBackgroundColor: Palette.almostBlack,
       appBarTheme: const AppBarTheme(
         elevation: 0,
         color: Palette.almostBlack,
       ),
-
       textTheme: theme.primaryTextTheme
           .copyWith(
             button: theme.primaryTextTheme.button?.copyWith(
@@ -41,19 +38,17 @@ class CustomTheme {
           .apply(
             displayColor: Colors.white,
           ),
-
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(backgroundColor: Palette.red500),
       ),
-      
       sliderTheme: SliderThemeData(
         activeTrackColor: Colors.white,
         inactiveTrackColor: Colors.grey.shade800,
         thumbColor: Colors.white,
         valueIndicatorColor: Palette.red500,
         inactiveTickMarkColor: Colors.transparent,
-        activeTickMarkColor: Colors.transparent,  
-      )
+        activeTickMarkColor: Colors.transparent,
+      ),
     );
   }
 }

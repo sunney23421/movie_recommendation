@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_recommendation/features/movie_flow/movie_flow.dart';
@@ -11,9 +9,9 @@ void main() {
 }
 
 final dioProvider = Provider<Dio>((ref) {
-  return Dio(BaseOptions(
-    baseUrl: "https://api.themoviedb.org/3/",
-  ));
+  return Dio(
+    BaseOptions(baseUrl: "https://api.themoviedb.org/3/"),
+  );
 });
 
 class MyApp extends StatelessWidget {
@@ -21,7 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("main");
     return MaterialApp(
       title: 'Flutter Demo',
       darkTheme: CustomTheme.darkTheme(context),

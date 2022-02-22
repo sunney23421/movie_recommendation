@@ -32,6 +32,7 @@ dependencies:
   flutter_riverpod: 1.0.0
   riverpod: 1.0.0
   dio: 4.0.0
+  multiple_result: ^1.0.4
 
 
   # The following adds the Cupertino Icons font to your application.

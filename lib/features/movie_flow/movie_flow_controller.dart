@@ -8,7 +8,9 @@ import 'package:movie_recommendation/features/movie_flow/movie_service.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
 
 //riverpod manager
-final movieFlowControllerProvider = StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>((ref) {
+final movieFlowControllerProvider =
+    StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
+        (ref) {
   return MovieFlowController(
     MovieFlowState(
       pageController: PageController(),
@@ -20,7 +22,6 @@ final movieFlowControllerProvider = StateNotifierProvider.autoDispose<MovieFlowC
 });
 
 class MovieFlowController extends StateNotifier<MovieFlowState> {
-  
   MovieFlowController(
     MovieFlowState state,
     this._movieService,
@@ -33,8 +34,12 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     state = state.copyWith(genres: const AsyncValue.loading());
     final result = await _movieService.getGenres();
 
-    state = state.copyWith(genres: AsyncValue.data(result));
-    print("MovieFlowController");
+    result.when((error) {
+      state = state.copyWith(genres: AsyncValue.error(error));
+    }, (genres) {
+      final updatedGenres = AsyncValue.data(genres);
+      state = state.copyWith(genres: updatedGenres);
+    });
   }
 
   Future<void> getRecommendedMovie() async {
@@ -50,8 +55,12 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     );
     // Lecture 5 - AsyncValue and Fetching
 
-    state = state.copyWith(movie: AsyncValue.data(result));
-  }
+    result.when((error) {
+      state = state.copyWith(movie: AsyncValue.error(error));
+    }, (movie) {
+      state = state.copyWith(movie: AsyncValue.data(movie));
+    });
+  }// module 4 Lecture 2 - Multiple return types
 
   void toggleSelected(Genre genre) {
     state = state.copyWith(

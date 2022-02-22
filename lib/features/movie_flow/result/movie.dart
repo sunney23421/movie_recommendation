@@ -9,7 +9,7 @@ import 'package:movie_recommendation/features/movie_flow/result/movie_entity.dar
 class Movie {
   final String title;
   final String overview;
-  final num voteAverage;
+  final num  voteAverage;
   final List<Genre> genres;
   final String releaseDate;
   final String? backdropPath;

@@ -1,11 +1,7 @@
 //riverpod
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_recommendation/features/movie_flow/movie_flow.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
-
 import 'genre/genre.dart';
 
 @immutable
@@ -43,7 +39,6 @@ class MovieFlowState {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    print("MovieFlowState");
     return other is MovieFlowState &&
         other.pageController == pageController &&
         other.rating == rating &&

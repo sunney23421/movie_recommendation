@@ -5,10 +5,7 @@ import 'package:movie_recommendation/core/widget/primary_button.dart';
 import 'package:movie_recommendation/features/movie_flow/movie_flow_controller.dart';
 
 class LandingScreen extends ConsumerWidget {
-  const LandingScreen({
-    Key? key,
-    
-  }) : super(key: key);
+  const LandingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,11 +25,12 @@ class LandingScreen extends ConsumerWidget {
           PrimaryButton(
             onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage,
             text: "Get Started",
-          ),//this is custom widget
-          const SizedBox(height: kMediumSpacing,)
+          ), //this is custom widget
+          const SizedBox(
+            height: kMediumSpacing,
+          )
         ],
       )),
     );
   }
-  
 }
