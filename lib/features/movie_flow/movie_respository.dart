@@ -6,18 +6,18 @@ import 'package:movie_recommendation/features/movie_flow/result/movie.dart';
 import 'package:movie_recommendation/features/movie_flow/result/movie_entity.dart';
 import 'package:movie_recommendation/main.dart';
 
-final MovieRespositoryProvider = Provider<MovieRespositoryProvider>((ref) {
+final movieRepositoryProvider = Provider<MovieRepository>((ref) {
   final dio = ref.watch(dioProvider);
   return TMDMovieRepository(dio: dio);
 });
 
-abstract class MovieRespository {
+abstract class MovieRepository {
   Future<List<GenreEntity>> getMovieGenres();
   Future<List<MovieEntity>> getRecommendedMovies(
       double rating, String date, String genreIds);
 }
 
-class TMDMovieRepository implements MovieRespository {
+class TMDMovieRepository implements MovieRepository {
   TMDMovieRepository({required this.dio});
   final Dio dio;
 

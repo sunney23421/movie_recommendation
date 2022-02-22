@@ -11,14 +11,18 @@ class Genre {
   const Genre({required this.name, this.id = 0, this.isSelected = false});
 
   factory Genre.fromEntity(GenreEntity entity) {
-    return Genre(name: entity.name,id: entity.id,isSelected: false);
+    return Genre(
+      name: entity.name,
+      id: entity.id,
+      isSelected: false,
+    );
   }
 
   Genre toggleSelected() {
     return Genre(
       name: name,
       id: id,
-      isSelected: false,
+      isSelected: !isSelected,
     );
   }
 
