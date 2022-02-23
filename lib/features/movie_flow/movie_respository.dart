@@ -68,7 +68,7 @@ class TMDMovieRepository implements MovieRepository {
     } on DioError catch (e) {
       if (e.error is SocketException) {
         throw Failure(
-          message: "No internet conncetion2",
+          message: "No internet conncetion",
           exception: e,
         );
       } //end try

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_recommendation/core/constants.dart';
+import 'package:movie_recommendation/core/failure.dart';
+import 'package:movie_recommendation/core/widget/failure_screen.dart';
 import 'package:movie_recommendation/core/widget/primary_button.dart';
 import 'package:movie_recommendation/features/movie_flow/genre/genre.dart';
 import 'package:movie_recommendation/features/movie_flow/movie_flow_controller.dart';
@@ -28,7 +30,7 @@ class ResultScreen extends ConsumerWidget {
                       Stack(
                         clipBehavior: Clip.none,
                         children: [
-                           CoverImage(movie: movie),
+                          CoverImage(movie: movie),
                           Positioned(
                             width: MediaQuery.of(context).size.width,
                             bottom: -(movieHeight / 2),
@@ -64,7 +66,11 @@ class ResultScreen extends ConsumerWidget {
             child: CircularProgressIndicator(),
           )),
           error: (e, s) {
-            return const Text("Something went wrong on our end");
+            //return const Text("Something went wrong on our end");
+            if (e is Failure) {
+              return FailureScreen(message: e.message);
+            }
+            return const FailureScreen(message: "Something went wrong on our end");
           },
         );
   }
