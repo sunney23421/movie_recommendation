@@ -1,7 +1,7 @@
 # movie_recommendation
-To be honest,this is just a project for learning new stuff like new Flutter ver, riverpod ,and intergated test that i really don't get in.
+To be honest, this is just a project for learning new stuff like new Flutter ver, riverpod ,and intergated test that i really don't getit.
 A new Flutter project.
-try to finish this one first.
+
 
 ## Getting Started
 This is the movie recommendation application
